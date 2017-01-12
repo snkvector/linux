@@ -1,0 +1,40 @@
+###############################################################################
+# File Name  : Makefile.$(DERIVATIVE).definitions                             #
+# Description: This file simply defines the locations for RAM/ROM,            #
+#              which will be included by Makefile.$(PLATFORM)...make,         #
+#              which generates the Linker-Command-File                        #
+#              This is a hardware specific file.                              #
+# Application: GNU Make version 3.79.1, by Richard Stallman and Roland McGrath#
+#              Built for Windows32                                            #
+#-----------------------------------------------------------------------------#
+#               C O P Y R I G H T                                             #
+#-----------------------------------------------------------------------------#
+# Copyright (c) 2014 by Vector Informatik GmbH.  All rights reserved.         #
+#                                                                             #
+#-----------------------------------------------------------------------------#
+#               A U T H O R   I D E N T I T Y                                 #
+#-----------------------------------------------------------------------------#
+# Initials     Name                      Company                              #
+# --------     ---------------------     -------------------------------------#
+# Pdr          Philipp Duller            Vector Informatik GmbH               #
+#-----------------------------------------------------------------------------#
+#               R E V I S I O N   H I S T O R Y                               #
+#-----------------------------------------------------------------------------#
+# Date         Version  Sign Description                                      #
+# ----------   -------  ---- -------------------------------------------------#
+# 2013-10-16   1.0      Pdr  First version                                    #
+# 2014-03-31   1.1      Mto  Adapted for IMX6DL                               #
+###############################################################################
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                               ~~~ Note ~~~                               #
+# - Exception-/Interrupt-Vectors will be mapped at the start of ROM or RAM #
+#   --> Please check: >>VECTABLE_LOCATION<< Variable @ Makefile.config     #
+# - Stack will be mapped behind all other R/W-Segments (RAM)               #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+IMX6S_ROM_MAPPING = 0x00000000
+IMX6S_ROM_SIZE =    0x00000000
+
+IMX6S_RAM_MAPPING = 0x2ffffe00
+IMX6S_RAM_SIZE =    256K
