@@ -167,9 +167,16 @@ Label(_vector_table)
   EXPORT Startup_Handler
 
   Section_3(.STARTUP,CODE,READONLY)
-Label(Startup_Handler)
-
-  LDR     R0, =Stack_Top
+  
+Label(Startup_Handler)  
+MOV     R1,#0
+Label(debugLoop)
+CMP     R1,#1
+BGT    Startup_Handler1
+B      debugLoop
+  
+Label(Startup_Handler1)
+  MOV     R1,#0  
   
 #  if defined (BRS_COMP_GHS)
 ;  FIQ (fiq) - Designed to support data transfer or channel process
@@ -258,6 +265,20 @@ Label(bss_loop)
 Label(bss_loop_end)
 #  endif
 
+MRC p15, 0, r1, c1, c0, 0 
+BIC r1, r1, #0x1  
+MCR p15, 0, r1, c1, c0, 0   
+
+MRC p15, 0, r1, c1, c0, 0 
+BIC r1, r1, #(0x1 << 12)  
+BIC r1, r1, #(0x1 << 2)   
+MCR p15, 0, r1, c1, c0, 0   
+  
+MOV r1, #0 
+MCR p15, 0, r1, c7, c5, 0 
+    
+ 
+    
 ;  ----- Branch to Main-Function ----------------------------------
   IMPORT  main
   LDR     R0, =main
